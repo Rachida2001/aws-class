@@ -1,0 +1,32 @@
+Steps on Configuring VPN Connection Between on-Prem and Prod-VPC
+
+Step 1.
+Launch an EC2 instance to use as OpenSwan Server in the public subnet of the on-prem VPC.
+Open ports 22 and ICMP All Traffic IP4 to test connection. Keep not of Public IP of OpenSwan Server for later use.
+Disable source/destination checks on OpenSwan Server to use it as the Customer Gateway Connection.
+Launch another Instance similar to OpenSwan Server but don’t disable the source/destination checks, this instance will be used as a test server for pinging.
+
+Step 2.
+Launch an EC2 instance on the Prod VPC with ports 22 and ICMP traffic open.
+
+Step 3.
+Create a customer gateway, set the route to static, and use the Public IP of OpenSwan Server.
+
+Step 4. 
+Create a Virtual Gateway and attach it to Prod VPC.
+
+Step. 5 
+Create a VPN connection, target type Virtual Private Gateways, select the CGW and VGW created in previous steps.
+Static route prefix:
+On-prem is the local route and Prod VPC is the remote route.
+
+Step 6.
+Download the VPN configuration as OpenSwan type.
+
+Step 7.
+Configure the OpenSwan instance on perm VPC following the  configuration file that was downloaded.
+Install OpenSwan on instance and start ipsec service.
+
+Step. 8
+Test Connection by pinging from on prem server to server on Prod VPC.
+ 
