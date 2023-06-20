@@ -2,6 +2,9 @@ resource "aws_kms_key" "terraform-bucket-key" {
   description             = "This key is used to encrypt s3 terraform state bucket"
   enable_key_rotation     = true
   deletion_window_in_days = 10
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_kms_alias" "key-alias" {
